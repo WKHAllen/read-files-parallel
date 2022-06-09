@@ -87,7 +87,9 @@ fn rank_times(times: Vec<(&str, Duration)>) {
 
 #[tokio::main]
 async fn main() {
-    let test_path_arg = env::args().nth(1).expect("expected path argument");
+    let test_path_arg = env::args()
+        .nth(1)
+        .unwrap_or(env!("CARGO_MANIFEST_DIR").to_owned());
     let test_path = Path::new(&test_path_arg);
 
     if !test_path.exists() {
@@ -95,6 +97,9 @@ async fn main() {
     } else if !test_path.is_dir() {
         panic!("provided path is not a directory");
     }
+
+    separator!();
+    println!("Path: {}", test_path.display());
 
     let (serial_res, serial_duration) = test_method!(&test_path);
     let threadpool_duration = test_method!(
