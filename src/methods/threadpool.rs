@@ -23,12 +23,9 @@ pub fn read_files(path: &Path) -> (usize, usize, usize) {
         num_jobs += 1;
     }
 
-    let res = rx
-        .iter()
-        .take(num_jobs)
-        .fold((0usize, 0usize, 0usize), |acc, current| {
-            (acc.0 + current.0, acc.1 + current.1, acc.2 + current.2)
-        });
+    let res = rx.iter().take(num_jobs).fold((0, 0, 0), |acc, current| {
+        (acc.0 + current.0, acc.1 + current.1, acc.2 + current.2)
+    });
 
     res
 }
