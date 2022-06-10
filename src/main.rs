@@ -118,14 +118,6 @@ async fn main() {
         methods::pariter::read_files
     );
 
-    // (serially, as a base case)
-    // threadpool
-    // tokio
-    // rayon
-    // pariter
-    // monoio
-    // glommio
-
     rank_times(vec![
         ("serial", serial_duration),
         ("threadpool", threadpool_duration),
