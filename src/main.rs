@@ -111,6 +111,12 @@ async fn main() {
     let tokio_duration =
         test_method_async!(&test_path, &serial_res, "tokio", methods::tokio::read_files);
     let rayon_duration = test_method!(&test_path, &serial_res, "rayon", methods::rayon::read_files);
+    let pariter_duration = test_method!(
+        &test_path,
+        &serial_res,
+        "pariter",
+        methods::pariter::read_files
+    );
 
     // (serially, as a base case)
     // threadpool
@@ -125,5 +131,6 @@ async fn main() {
         ("threadpool", threadpool_duration),
         ("tokio", tokio_duration),
         ("rayon", rayon_duration),
+        ("pariter", pariter_duration),
     ]);
 }
